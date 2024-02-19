@@ -37,9 +37,16 @@ int main(int argc, char *argv[])
     // Display the game introduction and initialize the questions
     initialize_game();
 
+    printf("\n \033[0;36m WELCOME TO JEOPARDY!  \033[0;37m");
+
     // Prompt for players names
-    
-    // initialize each of the players in the array
+    for(int i =0; i < NUM_PLAYERS; i++){
+        players[i].score = 0;
+        printf("\n Please Enter Player %d's Name: ",i+1);
+        scanf("%s", (char *) &players[i].name);
+    }
+
+    display_categories();
 
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
