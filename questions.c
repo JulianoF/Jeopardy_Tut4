@@ -109,14 +109,17 @@ void display_question(char *category, int value)
 }
 
 // Returns true if the answer is correct for the question for that category and dollar value
-bool valid_answer(char *category, int value, char *answer)
+bool valid_answer(char *category, int value, char *answer, char **rightAns)
 {
     for(int i = 0; i < NUM_QUESTIONS; i++){
         if(strcasecmp(category,questions[i].category) == 0 && questions[i].value == value){
             if(strcasecmp(answer,questions[i].answer) == 0){
+                questions[i].answered = true;
                 return true;
             }
             else{
+                *rightAns = questions[i].answer;
+                questions[i].answered = true;
                 break;
             }
         }

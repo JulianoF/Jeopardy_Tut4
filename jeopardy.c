@@ -51,6 +51,15 @@ int main(int argc, char *argv[])
     // Perform an infinite loop getting command input from users until game ends
     while (gameNotFinished)
     {
+        for(int i = 0; i < NUM_QUESTIONS; i++){
+            if(!questions[i].answered){
+                gameNotFinished = true;
+                break;
+            }
+            else{
+                gameNotFinished = false;
+            }
+        }
         display_categories();
 
         char ansFirst[256];
@@ -73,6 +82,9 @@ int main(int argc, char *argv[])
         if(check != 200 && check != 400 && check != 600 && check != 800){
              printf("Not A Valid Question in this Game, Try Again.\n");
             continue;           
+        }else if(already_answered(catagoryChoice,check)){
+            printf("This question has already been answered, Try Again.\n");
+            continue;
         }
 
         display_question(catagoryChoice,check);
@@ -91,25 +103,30 @@ int main(int argc, char *argv[])
         fgets(buffer, BUFFER_LEN, stdin);
 
         tokenize((char *)buffer,&tokenizedAns);
-
+        char *realAns;
 
         if(tokenizedAns == NULL){
             printf("Invalid Answer Format");
         }
-        else if(valid_answer(catagoryChoice,check,tokenizedAns)){
-            printf("Valid Answer!");
+        else if(valid_answer(catagoryChoice,check,tokenizedAns,&realAns)){
+            printf("That answer is Correct!\n");
+            update_score(players,NUM_PLAYERS,ansFirst,check);
         }
         else{
-            printf("Wrong Answer");
+            printf("Wrong Answer, The correct answer was: %s \n",realAns);
         }
-        // Execute the game until all questions are answered
-
-        // Display the final results and exit
-        if(strcmp(ansFirst,"exit")==0){//TEST CODE
-            show_results(players,NUM_PLAYERS);
-            break;
-        }
+        // Execute the game until all questions are answered 
+        for(int i = 0; i < NUM_QUESTIONS; i++){
+            if(!questions[i].answered){
+                gameNotFinished = true;
+                break;
+            }
+            else{
+                gameNotFinished = false;
+            }
+        }       
     }
+    show_results(players,NUM_PLAYERS);
     return EXIT_SUCCESS;
 }
 
