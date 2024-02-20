@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
             continue;           
         }
 
-        //DISPLAY QUESTION HERE
+        display_question(catagoryChoice,check);
 
         printf("\nWhich Player Answered First?:");
         scanf("%s", ansFirst);
@@ -86,13 +86,26 @@ int main(int argc, char *argv[])
         }
 
         // Call functions from the questions and players source files
+        char *tokenizedAns;
         printf("Answer: ");
         fgets(buffer, BUFFER_LEN, stdin);
-        printf("%s",buffer);
+
+        tokenize((char *)buffer,&tokenizedAns);
+
+
+        if(tokenizedAns == NULL){
+            printf("Invalid Answer Format");
+        }
+        else if(valid_answer(catagoryChoice,check,tokenizedAns)){
+            printf("Valid Answer!");
+        }
+        else{
+            printf("Wrong Answer");
+        }
         // Execute the game until all questions are answered
 
         // Display the final results and exit
-        if(strcmp(ansFirst,"exit")==0){
+        if(strcmp(ansFirst,"exit")==0){//TEST CODE
             show_results(players,NUM_PLAYERS);
             break;
         }
@@ -101,7 +114,18 @@ int main(int argc, char *argv[])
 }
 
 void tokenize(char *input, char **tokens){
-
+    char *str;
+    if((str = strtok(input, " ")) != NULL){
+        if(strcasecmp(str, "who") != 0 && strcasecmp(str, "what") != 0){
+            return;
+        }
+    }
+    if((str = strtok(NULL, " ")) != NULL){
+        if(strcasecmp(str, "is") != 0){
+            return;
+        }
+    }
+    *tokens = strtok(NULL, "\n");
 }
 
 void show_results(player *players, int num_players){

@@ -66,8 +66,8 @@ void initialize_game(void)
     strcpy(questions[10].answer, "");
 
     questions[11].value = 800;
-    strcpy(questions[11].question, "A tool that translates a high level language to machine code");
-    strcpy(questions[11].answer, "Compiler");
+    strcpy(questions[11].question, "");
+    strcpy(questions[11].answer, "");
 }
 
 // Displays each of the remaining categories and question dollar values that have not been answered
@@ -100,33 +100,49 @@ void display_categories(void)
 void display_question(char *category, int value)
 {
     for(int i = 0; i < NUM_QUESTIONS; i++){
-        if(strcmp(category,questions[i].category) == 0 && questions[i].value == value){
-            printf("%s",questions[i].question);
-            break;
-        }
-        else{
-            printf("Error Finding Question\n");
+        if(strcasecmp(category,questions[i].category) == 0 && questions[i].value == value){
+            printf("\n\033[0;33m%s\033[0;37m\n",questions[i].question);
+            return;
         }
     }
+    printf("Error Finding Question\n");
 }
 
 // Returns true if the answer is correct for the question for that category and dollar value
 bool valid_answer(char *category, int value, char *answer)
 {
-    // Look into string comparison functions
+    for(int i = 0; i < NUM_QUESTIONS; i++){
+        if(strcasecmp(category,questions[i].category) == 0 && questions[i].value == value){
+            if(strcasecmp(answer,questions[i].answer) == 0){
+                return true;
+            }
+            else{
+                break;
+            }
+        }
+    } 
     return false;
 }
 
 // Returns true if the question has already been answered
 bool already_answered(char *category, int value)
 {
-    // lookup the question and see if it's already been marked as answered
+    for(int i = 0; i < NUM_QUESTIONS; i++){
+        if(strcasecmp(category,questions[i].category) == 0 && questions[i].value == value){
+            if(questions[i].answered){
+                return true;
+            }
+            else{
+                break;
+            }
+        }
+    }
     return false;
 }
 
 bool validate_catagory(char *cataChoice){
     for(int i = 0; i < NUM_CATEGORIES; i++){
-        if(strcmp(categories[i],cataChoice)==0){
+        if(strcasecmp(categories[i],cataChoice)==0){
             return true;
         }
     }
