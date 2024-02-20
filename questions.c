@@ -87,10 +87,10 @@ void display_categories(void)
             printf("\n");
         }
         if(questions[i].answered){
-            printf("------\033[0;37mQ%d\033[0;37m------", (i / 3)+1);
+            printf("-----\033[0;37m%d\033[0;37m------", ((i / 3)+1)*200);
         }
         else{
-            printf("------\033[0;36mQ%d\033[0;37m------", (i / 3)+1);
+            printf("-----\033[0;36m%d\033[0;37m------", ((i / 3)+1)*200);
         }
     }
     printf("\n");
