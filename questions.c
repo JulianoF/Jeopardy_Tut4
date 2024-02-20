@@ -51,11 +51,11 @@ void initialize_game(void)
 
     questions[7].value = 600;
     strcpy(questions[7].question, "Which algorythm tries to simulate the annealing process of metal? ");
-    strcpy(questions[7].answer, "Simulated Annealing");
+    strcpy(questions[7].answer, "Simulated-Annealing");
 
     questions[8].value = 600;
     strcpy(questions[8].question, "What is the most common RAID type?");
-    strcpy(questions[8].answer, "RAID 5");
+    strcpy(questions[8].answer, "RAID5");
 
     questions[9].value = 800;
     strcpy(questions[9].question, "What is the lowest level programming language?");
