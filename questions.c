@@ -42,32 +42,32 @@ void initialize_game(void)
     strcpy(questions[4].answer, "Countingsort");
 
     questions[5].value = 400;
-    strcpy(questions[5].question, "");
-    strcpy(questions[5].answer, "");
+    strcpy(questions[5].question, "In a database what is the datatype used to store integers?");
+    strcpy(questions[5].answer, "Int");
 
     questions[6].value = 600;
-    strcpy(questions[6].question, "");
-    strcpy(questions[6].answer, "");
+    strcpy(questions[6].question, "What programming language makes use of garabage collection and OOP?");
+    strcpy(questions[6].answer, "Java");
 
     questions[7].value = 600;
-    strcpy(questions[7].question, "");
-    strcpy(questions[7].answer, "");
+    strcpy(questions[7].question, "Which algorythm tries to simulate the annealing process of metal? ");
+    strcpy(questions[7].answer, "Simulated Annealing");
 
     questions[8].value = 600;
-    strcpy(questions[8].question, "");
-    strcpy(questions[8].answer, "");
+    strcpy(questions[8].question, "What is the most common RAID type?");
+    strcpy(questions[8].answer, "RAID 5");
 
     questions[9].value = 800;
-    strcpy(questions[9].question, "");
-    strcpy(questions[9].answer, "");
+    strcpy(questions[9].question, "What is the lowest level programming language?");
+    strcpy(questions[9].answer, "Assembly");
 
     questions[10].value = 800;
-    strcpy(questions[10].question, "");
-    strcpy(questions[10].answer, "");
+    strcpy(questions[10].question, "In terms of big O notation, what is the fastest function?");
+    strcpy(questions[10].answer, "O(1)");
 
     questions[11].value = 800;
-    strcpy(questions[11].question, "");
-    strcpy(questions[11].answer, "");
+    strcpy(questions[11].question, "What year was MySQL founded?");
+    strcpy(questions[11].answer, "1995");
 }
 
 // Displays each of the remaining categories and question dollar values that have not been answered
