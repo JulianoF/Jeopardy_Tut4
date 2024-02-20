@@ -56,19 +56,34 @@ int main(int argc, char *argv[])
         char ansFirst[256];
         char catagoryChoice[128];
         char questionChoice[64];
-
-        printf("\nWhich Player Answered First?:");
-        scanf("%s", ansFirst);
         int c;
-        while ((c = getchar()) != '\n' && c != EOF);
 
         printf("\nWhat Catagory?:");
         scanf("%s", catagoryChoice);
         while ((c = getchar()) != '\n' && c != EOF);
+        if(!validate_catagory(catagoryChoice)){
+            printf("Not A Valid Catagory in this Game, Try Again.\n");
+            continue;
+        }
 
         printf("\nWhich Question?:");
         scanf("%s", questionChoice);
         while ((c = getchar()) != '\n' && c != EOF);
+        int check = atoi(questionChoice);
+        if(check != 200 && check != 400 && check != 600 && check != 800){
+             printf("Not A Valid Question in this Game, Try Again.\n");
+            continue;           
+        }
+
+        //DISPLAY QUESTION HERE
+
+        printf("\nWhich Player Answered First?:");
+        scanf("%s", ansFirst);
+        while ((c = getchar()) != '\n' && c != EOF);
+        if(!player_exists(players,NUM_PLAYERS,ansFirst)){
+            printf("Not A Valid Player in this Game, Try Again.\n");
+            continue;
+        }
 
         // Call functions from the questions and players source files
         printf("Answer: ");
@@ -77,6 +92,10 @@ int main(int argc, char *argv[])
         // Execute the game until all questions are answered
 
         // Display the final results and exit
+        if(strcmp(ansFirst,"exit")==0){
+            show_results(players,NUM_PLAYERS);
+            break;
+        }
     }
     return EXIT_SUCCESS;
 }
@@ -86,5 +105,14 @@ void tokenize(char *input, char **tokens){
 }
 
 void show_results(player *players, int num_players){
-
+    int max = 0;
+    char maxName[64];
+    for(int i = 0; i < num_players; i++){
+        if(players[i].score > max){
+            strcpy(maxName,players[i].name);
+            max = players[i].score;
+        }
+        printf("\nThe Score for Player %s is: %d",players[i].name,players[i].score);
+    }
+    printf("\n\n\033[0;32mThe Winner is: %s, with %d score!\n\n",maxName,max);
 }

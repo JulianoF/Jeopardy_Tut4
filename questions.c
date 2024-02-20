@@ -99,7 +99,15 @@ void display_categories(void)
 // Displays the question for the category and dollar value
 void display_question(char *category, int value)
 {
-
+    for(int i = 0; i < NUM_QUESTIONS; i++){
+        if(strcmp(category,questions[i].category) == 0 && questions[i].value == value){
+            printf("%s",questions[i].question);
+            break;
+        }
+        else{
+            printf("Error Finding Question\n");
+        }
+    }
 }
 
 // Returns true if the answer is correct for the question for that category and dollar value
@@ -113,5 +121,14 @@ bool valid_answer(char *category, int value, char *answer)
 bool already_answered(char *category, int value)
 {
     // lookup the question and see if it's already been marked as answered
+    return false;
+}
+
+bool validate_catagory(char *cataChoice){
+    for(int i = 0; i < NUM_CATEGORIES; i++){
+        if(strcmp(categories[i],cataChoice)==0){
+            return true;
+        }
+    }
     return false;
 }
